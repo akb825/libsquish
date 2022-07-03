@@ -28,12 +28,20 @@
 
 // Set to 1 when building squish to use Altivec instructions.
 #ifndef SQUISH_USE_ALTIVEC
+#if defined(__ppc__) || defined(__ppc64__)
+#define SQUISH_USE_ALTIVEC 1
+#else
 #define SQUISH_USE_ALTIVEC 0
+#endif
 #endif
 
 // Set to 1 or 2 when building squish to use SSE or SSE2 instructions.
 #ifndef SQUISH_USE_SSE
+#if defined(__x86_64__) || defined(_M_AMD64) || defined(__i386__) || defined(_M_I86)
+#define SQUISH_USE_SSE 2
+#else
 #define SQUISH_USE_SSE 0
+#endif
 #endif
 
 // Internally set SQUISH_USE_SIMD when either Altivec or SSE is available.
